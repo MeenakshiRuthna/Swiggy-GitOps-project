@@ -5,7 +5,7 @@ provider "aws" {
 
 #Creating IAM role for EKS
 resource "aws_iam_role" "master" {
-  name = "yaswanth-eks-master1"
+  name = "yaswanth-eks-master4"
 
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
@@ -37,7 +37,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSVPCResourceController" {
 }
 
 resource "aws_iam_role" "worker" {
-  name = "yaswanth-eks-worker1"
+  name = "yaswanth-eks-worker4"
 
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
@@ -54,7 +54,7 @@ resource "aws_iam_role" "worker" {
 }
 
 resource "aws_iam_policy" "autoscaler" {
-  name = "veera-eks-autoscaler-policy1"
+  name = "veera-eks-autoscaler-policy4"
   policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
@@ -114,7 +114,7 @@ resource "aws_iam_instance_profile" "worker" {
 # data source 
 data "aws_vpc" "main" {
   tags = {
-    Name = "Jumphost-vpc" # Specify the name of your existing VPC
+    Name = "Jumphost44-vpc" # Specify the name of your existing VPC
   }
 }
 
@@ -137,7 +137,7 @@ data "aws_security_group" "selected" {
   vpc_id = data.aws_vpc.main.id
   filter {
     name   = "tag:Name"
-    values = ["Jumphost-sg"]
+    values = ["Jumphost44-sg"]
   }
 }
 
@@ -167,7 +167,7 @@ resource "aws_eks_node_group" "node-grp" {
   subnet_ids      = [data.aws_subnet.subnet-1.id, data.aws_subnet.subnet-2.id]
   capacity_type   = "ON_DEMAND"
   disk_size       = 20
-  instance_types  = ["t2.large"]
+  instance_types  = ["m7i-flex.large"]
 
 
 
@@ -181,9 +181,9 @@ resource "aws_eks_node_group" "node-grp" {
   }
 
   scaling_config {
-    desired_size = 3
+    desired_size = 2
     max_size     = 10
-    min_size     = 2
+    min_size     = 1
   }
 
   update_config {
