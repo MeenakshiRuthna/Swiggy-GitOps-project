@@ -115,14 +115,14 @@ pipeline {
         }
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/arumullayaswanth/Swiggy-GitOps-project.git'
+                git branch: 'master', url: 'https://github.com/MeenakshiRuthna/Swiggy-GitOps-project.git'
             }
         }
         stage('Update Deployment file') {
             environment {
                 GIT_REPO_NAME = "Swiggy-GitOps-project"      // replace your github rep name
-                GIT_EMAIL = "yaswanth.arumulla@gmail.com"    //replacr your email id
-                GIT_USER_NAME = "arumullayaswanth"           // replace your user name
+                GIT_EMAIL = "meenakshiruthna@gmail.com"    //replacr your email id
+                GIT_USER_NAME = "meenakshiruthna"           // replace your user name
                 YAML_FILE = "deployment.yml"
             }
             steps {
